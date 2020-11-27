@@ -1,0 +1,20 @@
+{
+  "name": "firebase-express-react-app",
+  "private": true,
+  "workspaces": [
+    "app",
+    "server"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkholic/firebase-express-react-app.git"
+  },
+  "author": "thinkholic",
+  "bugs": {
+    "url": "https://github.com/thinkholic/firebase-express-react-app/issues"
+  },
+  "homepage": "https://github.com/thinkholic/firebase-express-react-app#readme"
+}
