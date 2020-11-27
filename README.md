@@ -2,4 +2,6 @@
 
 ## Approach
 
-* I use yarn workspaces to mange two apps (express api and react app) in a single repository.
+* I am using `yarn workspaces` to mange two apps (backend and frontend) in a single repository.
+* `Express` for the api layer
+* `create-react-app` for bootstraping the react project.

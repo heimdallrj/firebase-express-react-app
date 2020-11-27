@@ -2,6 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+// Initialize firebase instance
+const configureFirebase = require("./firebase");
+configureFirebase();
+
 const apiRoutes = require("./routes/api");
 
 const app = express();
