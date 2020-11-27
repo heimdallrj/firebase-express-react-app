@@ -11,10 +11,6 @@ const Users = {
     await usersRef.doc(userId).set(docModified);
     return docModified;
   },
-  findAll: async () => {
-    const snapshot = await usersRef.get();
-    return snapshot.docs.map((doc) => doc.data());
-  },
   findOne: async (id) => {
     const doc = await usersRef.doc(id).get();
     if (!doc.exists) return null;
