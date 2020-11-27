@@ -1,8 +1,8 @@
-const admin = require("firebase-admin");
-const uniqid = require("uniqid");
+const admin = require('firebase-admin');
+const uniqid = require('uniqid');
 
 const ds = admin.firestore();
-const usersRef = ds.collection("users");
+const usersRef = ds.collection('users');
 
 const Users = {
   create: async (doc) => {

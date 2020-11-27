@@ -1,10 +1,10 @@
-const express = require("express");
-const pick = require("lodash/pick");
+const express = require('express');
+const pick = require('lodash/pick');
 
 const router = express.Router();
 
-const Orders = require("../firebase/firestore/orders");
-const Users = require("../firebase/firestore/users");
+const Orders = require('../firebase/firestore/orders');
+const Users = require('../firebase/firestore/users');
 
 const response = {
   code: 401,
@@ -14,7 +14,7 @@ const response = {
 /**
  * /orders
  */
-router.get("/orders", async (req, res) => {
+router.get('/orders', async (req, res) => {
   try {
     const orders = await Orders.findAll();
     response.code = 200;
@@ -26,7 +26,7 @@ router.get("/orders", async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.get("/orders/:id", async (req, res) => {
+router.get('/orders/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const order = await Orders.findOne(id);
@@ -39,9 +39,9 @@ router.get("/orders/:id", async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.post("/orders", async (req, res) => {
+router.post('/orders', async (req, res) => {
   const data = req.body;
-  const order = pick(data, ["title", "bookingDate", "address", "customer"]);
+  const order = pick(data, ['title', 'bookingDate', 'address', 'customer']);
 
   try {
     const newOrder = await Orders.create(order);
@@ -54,10 +54,10 @@ router.post("/orders", async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.put("/orders/:id", async (req, res) => {
+router.put('/orders/:id', async (req, res) => {
   const id = req.params.id;
   const data = req.body;
-  const order = pick(data, ["title", "bookingDate"]);
+  const order = pick(data, ['title', 'bookingDate']);
 
   try {
     const updatedOrder = await Orders.update(id, order);
@@ -73,7 +73,7 @@ router.put("/orders/:id", async (req, res) => {
 /**
  * /users
  */
-router.get("/users/:id", async (req, res) => {
+router.get('/users/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const user = await Users.findOne(id);
@@ -86,7 +86,7 @@ router.get("/users/:id", async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.post("/users", async (req, res) => {
+router.post('/users', async (req, res) => {
   const user = req.body;
 
   try {
@@ -100,7 +100,7 @@ router.post("/users", async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.put("/users/:id", async (req, res) => {
+router.put('/users/:id', async (req, res) => {
   const id = req.params.id;
   const user = req.body;
 
