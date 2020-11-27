@@ -1,4 +1,5 @@
 const express = require("express");
+const pick = require("lodash/pick");
 
 const router = express.Router();
 
@@ -40,9 +41,10 @@ router.get("/orders/:id", async (req, res) => {
 
 router.post("/orders", async (req, res) => {
   const data = req.body;
+  const order = pick(data, ["title", "bookingDate", "address", "customer"]);
 
   try {
-    const newOrder = await Orders.create(data);
+    const newOrder = await Orders.create(order);
     response.code = 200;
     response.message = newOrder;
   } catch (err) {
@@ -55,9 +57,10 @@ router.post("/orders", async (req, res) => {
 router.put("/orders/:id", async (req, res) => {
   const id = req.params.id;
   const data = req.body;
+  const order = pick(data, ["title", "bookingDate"]);
 
   try {
-    const updatedOrder = await Orders.update(id, data);
+    const updatedOrder = await Orders.update(id, order);
     response.code = 200;
     response.message = updatedOrder;
   } catch (err) {
