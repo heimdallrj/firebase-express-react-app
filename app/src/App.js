@@ -8,12 +8,17 @@ import Home from 'screens/Home';
 import Orders from 'screens/Orders';
 import OrderSingle from 'screens/Orders/Single';
 import OrderCreate from 'screens/Orders/Create';
+import Logout from 'screens/Logout';
 
 function App() {
   return (
     <Router>
       <Route exact path="/login">
         <Login />
+      </Route>
+
+      <Route exact path="/logout">
+        <Logout />
       </Route>
 
       <ProtectedRoute exact path="/" component={Home} />
@@ -23,10 +28,6 @@ function App() {
       <ProtectedRoute exact path="/orders/create" component={OrderCreate} />
 
       <ProtectedRoute exact path="/orders/:id" component={OrderSingle} />
-
-      <Route exact path="/logout">
-        <p>Logout</p>
-      </Route>
     </Router>
   );
 }

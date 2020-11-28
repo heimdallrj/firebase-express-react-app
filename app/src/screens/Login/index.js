@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik } from 'formik';
+
+import { login as acLogin } from 'store/reducers/authSlice';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
 
 export default function Login() {
+  const { user } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const login = (user, cb) => dispatch(acLogin(user, cb));
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div>
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
           const errors = {};
+
+          if (!values.password) {
+            errors.password = 'Required';
+          }
 
           if (!values.email) {
             errors.email = 'Required';
@@ -19,15 +38,13 @@ export default function Login() {
           ) {
             errors.email = 'Invalid email address';
           }
-
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-
+          login(values, (err, user) => {
             setSubmitting(false);
-          }, 400);
+            history.push('/');
+          });
         }}
       >
         {({
@@ -38,7 +55,6 @@ export default function Login() {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
             <TextInput

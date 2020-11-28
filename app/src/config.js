@@ -7,3 +7,6 @@ export const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MSG_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
+
+export const userSessionKey = process.env.REACT_APP_USER_SESSION_KEY;
+export const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
