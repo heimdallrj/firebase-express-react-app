@@ -26,13 +26,13 @@ const authSlice = createSlice({
     processing: null,
   },
   reducers: {
-    loginInProgress(state) {
+    requestInProgress(state) {
       state.processing = true;
     },
     loginSuccess(state, { payload }) {
       state.user = payload;
       state.processing = false;
-      state.user = payload;
+      state.error = null;
       setUser(payload);
     },
     loginFailed(state, { payload }) {
@@ -53,7 +53,7 @@ const authSlice = createSlice({
 });
 
 export const {
-  loginInProgress,
+  requestInProgress,
   loginSuccess,
   loginFailed,
   loggedOut,
@@ -62,7 +62,7 @@ export const {
 export const login = ({ email, password }, cb = () => {}) => async (
   dispatch
 ) => {
-  dispatch(loginInProgress());
+  dispatch(requestInProgress());
 
   try {
     const { additionalUserInfo, user } = await signInWithEmailAndPassword(
