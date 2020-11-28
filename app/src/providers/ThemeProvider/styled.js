@@ -19,7 +19,9 @@ export const Tabel = styled.table`
   font-size: 14px;
 `;
 
-export const TabelRow = styled.tr``;
+export const TabelRow = styled.tr`
+  cursor: pointer;
+`;
 
 export const TabelHead = styled.th`
   text-align: left;

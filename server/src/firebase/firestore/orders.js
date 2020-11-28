@@ -12,6 +12,7 @@ const Orders = {
     return docModified;
   },
   findAll: async () => {
+    // TODO Should impliment pagination
     const snapshot = await ordersRef.get();
     return snapshot.docs.map((doc) => doc.data());
   },

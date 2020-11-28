@@ -70,7 +70,7 @@ export default function OrderCreate() {
         ) => {
           const newOrder = {
             title,
-            bookingDate: new Date(bookingDate).getTime() / 1000,
+            bookingDate: new Date().getTime(),
             address: {
               city,
               country,

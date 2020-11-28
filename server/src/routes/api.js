@@ -11,17 +11,19 @@ const response = {
   message: null,
 };
 
-// const formatOrderData = ({ uid, title, bookingDate }) => ({uid, title, });
-// const formatOrdersResponse = (orders) => orders.map(formatOrderData);
-
 /**
  * /orders
  */
 router.get('/orders', async (req, res) => {
+  // TODO Should impliment pagination
   try {
     const orders = await Orders.findAll();
+
     response.code = 200;
-    response.message = orders;
+    // Note: Had to filter these dataset due to some invalid data in the database
+    response.message = orders.filter(
+      ({ bookingDate, uid }) => typeof bookingDate === 'number' && uid
+    );
   } catch (err) {
     response.code = 401;
     response.message = err;
@@ -33,6 +35,7 @@ router.get('/orders/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const order = await Orders.findOne(id);
+
     response.code = 200;
     response.message = order;
   } catch (err) {
@@ -48,6 +51,7 @@ router.post('/orders', async (req, res) => {
 
   try {
     const newOrder = await Orders.create(order);
+
     response.code = 200;
     response.message = newOrder;
   } catch (err) {
@@ -64,6 +68,7 @@ router.put('/orders/:id', async (req, res) => {
 
   try {
     const updatedOrder = await Orders.update(id, order);
+
     response.code = 200;
     response.message = updatedOrder;
   } catch (err) {
@@ -80,6 +85,7 @@ router.get('/users/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const user = await Users.findOne(id);
+
     response.code = 200;
     response.message = user;
   } catch (err) {
@@ -94,6 +100,7 @@ router.post('/users', async (req, res) => {
 
   try {
     const newUser = await Users.create(user);
+
     response.code = 200;
     response.message = newUser;
   } catch (err) {
@@ -109,6 +116,7 @@ router.put('/users/:id', async (req, res) => {
 
   try {
     const updatedUser = await Users.update(id, user);
+
     response.code = 200;
     response.message = updatedUser;
   } catch (err) {
