@@ -47,9 +47,9 @@ export default function Login() {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
+              errors={errors.email}
+              touched={touched.email}
             />
-
-            {errors.email && touched.email && errors.email}
 
             <TextInput
               type="password"
@@ -57,9 +57,9 @@ export default function Login() {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
+              errors={errors.password}
+              touched={touched.password}
             />
-
-            {errors.password && touched.password && errors.password}
 
             <Button type="submit" disabled={isSubmitting}>
               Login

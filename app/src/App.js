@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import ProtectedRoute from 'components/ProtectedRoute';
+
 import Login from 'screens/Login';
 import Home from 'screens/Home';
 import Orders from 'screens/Orders';
@@ -13,18 +15,15 @@ function App() {
       <Route exact path="/login">
         <Login />
       </Route>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route exact path="/orders">
-        <Orders />
-      </Route>
-      <Route exact path="/orders/:id">
-        <OrderSingle />
-      </Route>
-      <Route exact path="/orders/create">
-        <OrderCreate />
-      </Route>
+
+      <ProtectedRoute exact path="/" component={Home} />
+
+      <ProtectedRoute exact path="/orders" component={Orders} />
+
+      <ProtectedRoute exact path="/orders/create" component={OrderCreate} />
+
+      <ProtectedRoute exact path="/orders/:id" component={OrderSingle} />
+
       <Route exact path="/logout">
         <p>Logout</p>
       </Route>
