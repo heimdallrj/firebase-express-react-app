@@ -1,17 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
+
+import { createOrder as acCreateOrder } from 'store/reducers/ordersSlice';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
 
-import { Page, Heading } from 'providers/ThemeProvider/styled';
+import { Page, Heading, ErrorLabel } from 'providers/ThemeProvider/styled';
 
 export default function OrderCreate() {
+  const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const createOrder = (data, cb) => dispatch(acCreateOrder(data, cb));
+
   return (
     <Page>
       <Link to="/">&#8592; Back</Link>
       <Heading>Create New Order</Heading>
+
+      {error && <ErrorLabel>Oops! Something went wrong.</ErrorLabel>}
 
       <Formik
         initialValues={{
@@ -28,6 +40,10 @@ export default function OrderCreate() {
         validate={(values) => {
           const errors = {};
 
+          if (!values.title) {
+            errors.title = 'Required';
+          }
+
           if (!values.email) {
             errors.email = 'Required';
           } else if (
@@ -38,12 +54,40 @@ export default function OrderCreate() {
 
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit={(
+          {
+            title,
+            bookingDate,
+            city,
+            country,
+            street,
+            zip,
+            name,
+            email,
+            phone,
+          },
+          { setSubmitting }
+        ) => {
+          const newOrder = {
+            title,
+            bookingDate: new Date(bookingDate).getTime() / 1000,
+            address: {
+              city,
+              country,
+              street,
+              zip,
+            },
+            customer: { name, email, phone },
+          };
 
+          createOrder(newOrder, (err) => {
             setSubmitting(false);
-          }, 400);
+            if (err) {
+              setError(err);
+            } else {
+              history.push('/orders');
+            }
+          });
         }}
       >
         {({
@@ -57,9 +101,9 @@ export default function OrderCreate() {
         }) => (
           <form onSubmit={handleSubmit}>
             <TextInput
-              type="title"
               name="title"
               label="Title"
+              placeholder="eg. New Order"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.title}
@@ -68,9 +112,9 @@ export default function OrderCreate() {
             />
 
             <TextInput
-              type="bookingDate"
               name="bookingDate"
               label="Booking Date"
+              type="date"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.bookingDate}
@@ -79,9 +123,9 @@ export default function OrderCreate() {
             />
 
             <TextInput
-              type="name"
               name="name"
               label="Customer name"
+              placeholder="eg. John Doe"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.name}
@@ -93,6 +137,7 @@ export default function OrderCreate() {
               type="email"
               name="email"
               label="E-mail"
+              placeholder="eg. john@example.com"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -104,6 +149,7 @@ export default function OrderCreate() {
               type="phone"
               name="phone"
               label="Phone"
+              placeholder="eg. +94123456789"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.phone}
@@ -112,31 +158,9 @@ export default function OrderCreate() {
             />
 
             <TextInput
-              type="city"
-              name="city"
-              label="City"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.city}
-              error={errors.city}
-              touched={touched.city}
-            />
-
-            <TextInput
-              type="country"
-              name="country"
-              label="Country"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.country}
-              error={errors.country}
-              touched={touched.country}
-            />
-
-            <TextInput
-              type="street"
               name="street"
               label="Street"
+              placeholder="eg. Edmonton road"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.street}
@@ -145,14 +169,36 @@ export default function OrderCreate() {
             />
 
             <TextInput
-              type="zip"
+              name="city"
+              label="City"
+              placeholder="eg. Colombo"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.city}
+              error={errors.city}
+              touched={touched.city}
+            />
+
+            <TextInput
               name="zip"
               label="Zip"
+              placeholder="eg. 0005"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.zip}
               error={errors.zip}
               touched={touched.zip}
+            />
+
+            <TextInput
+              name="country"
+              label="Country"
+              placeholder="eg. Sri Lanka"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.country}
+              error={errors.country}
+              touched={touched.country}
             />
 
             <Button type="submit" disabled={isSubmitting}>

@@ -15,19 +15,21 @@ export default function Home() {
         Hello! <Name>{name}</Name>
       </Greet>
       <Grid>
-        <Tile>
-          <Link to="/orders">Orders</Link>
-        </Tile>
-        <Tile>
-          <Link to="/create-order">
+        <Link to="/orders">
+          <Tile>Orders</Tile>
+        </Link>
+
+        <Link to="/create-order">
+          <Tile>
             Create
             <br />
             New Order
-          </Link>
-        </Tile>
-        <Tile>
-          <Link to="/logout">Logout</Link>
-        </Tile>
+          </Tile>
+        </Link>
+
+        <Link to="/logout">
+          <Tile>Logout</Tile>
+        </Link>
       </Grid>
     </Page>
   );

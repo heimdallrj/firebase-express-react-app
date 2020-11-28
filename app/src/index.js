@@ -16,9 +16,7 @@ configureFirebase();
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <App />
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')

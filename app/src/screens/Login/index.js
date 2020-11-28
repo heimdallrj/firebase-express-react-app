@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Redirect, useHistory, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 
@@ -8,10 +8,11 @@ import { login as acLogin } from 'store/reducers/authSlice';
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
 
-import { Page, Heading } from 'providers/ThemeProvider/styled';
+import { Page, Heading, ErrorLabel } from 'providers/ThemeProvider/styled';
 
 export default function Login() {
   const { user } = useSelector((state) => state.auth);
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -25,6 +26,8 @@ export default function Login() {
   return (
     <Page>
       <Heading>Login</Heading>
+
+      {error && <ErrorLabel>Oops! Something went wrong.</ErrorLabel>}
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -45,9 +48,13 @@ export default function Login() {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          login(values, (err, user) => {
+          login(values, (err) => {
             setSubmitting(false);
-            history.push('/');
+            if (err) {
+              setError(err);
+            } else {
+              history.push('/');
+            }
           });
         }}
       >

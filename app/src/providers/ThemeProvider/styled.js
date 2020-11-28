@@ -10,6 +10,11 @@ export const Heading = styled.h2``;
 
 export const Row = styled.div``;
 
+export const ErrorLabel = styled.p`
+  color: red;
+  font-size: 12px;
+`;
+
 export const Tabel = styled.table`
   font-size: 14px;
 `;
