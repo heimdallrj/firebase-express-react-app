@@ -9,7 +9,6 @@ import {
   ErrorLabel,
   Tabel,
   TabelRow,
-  TabelHead,
   TabelBody,
   TabelCell,
 } from 'providers/ThemeProvider/styled';
@@ -45,12 +44,14 @@ export default function OrderSingle() {
           <TabelRow>
             <TabelCell>Title</TabelCell> <TabelCell>{title}</TabelCell>
           </TabelRow>
+
           <TabelRow>
             <TabelCell>Booking Date</TabelCell>
             <TabelCell>{`${moment(bookingDate).format(
               'DD.MM.YYYY'
             )}`}</TabelCell>
           </TabelRow>
+
           <TabelRow>
             <TabelCell>Address</TabelCell>
             <TabelCell>
@@ -60,12 +61,20 @@ export default function OrderSingle() {
               {country}
             </TabelCell>
           </TabelRow>
+
           <TabelRow>
             <TabelCell>Customer</TabelCell>
             <TabelCell>
               {name} <br />
               {email} <br />
               {phone}
+            </TabelCell>
+          </TabelRow>
+
+          <TabelRow>
+            <TabelCell></TabelCell>
+            <TabelCell>
+              <Link to={`/orders/${id}/edit`}>EDIT THIS ORDER</Link>
             </TabelCell>
           </TabelRow>
         </TabelBody>

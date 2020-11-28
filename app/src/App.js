@@ -7,6 +7,7 @@ import Login from 'screens/Login';
 import Home from 'screens/Home';
 import Orders from 'screens/Orders';
 import OrderSingle from 'screens/Orders/Single';
+import OrderEdit from 'screens/Orders/Edit';
 import OrderCreate from 'screens/Orders/Create';
 import Logout from 'screens/Logout';
 
@@ -29,6 +30,7 @@ function App() {
         <ProtectedRoute exact path="/orders" component={Orders} />
 
         <ProtectedRoute exact path="/orders/:id" component={OrderSingle} />
+        <ProtectedRoute exact path="/orders/:id/edit" component={OrderEdit} />
 
         <ProtectedRoute exact path="/create-order" component={OrderCreate} />
       </Router>
