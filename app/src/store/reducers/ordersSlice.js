@@ -8,30 +8,30 @@ const authSlice = createSlice({
   initialState: {
     orders: [],
     error: null,
-    processing: null,
+    loading: null,
   },
   reducers: {
     requestInProgress(state) {
-      state.processing = true;
+      state.loading = true;
     },
     fetchOrdersRequestSuccess(state, { payload }) {
       state.orders = payload;
-      state.processing = false;
+      state.loading = false;
       state.error = null;
     },
     fetchOrdersRequestFailed(state, { payload }) {
-      state.processing = false;
+      state.loading = false;
       state.error = payload;
     },
     createOrderRequestSuccess(state, { payload }) {
       const newOrders = state.orders;
       newOrders.push(payload);
       state.orders = newOrders;
-      state.processing = false;
+      state.loading = false;
       state.error = null;
     },
     createOrderRequestFailed(state, { payload }) {
-      state.processing = false;
+      state.loading = false;
       state.error = payload;
     },
     updateOrderRequestSuccess(state, { payload }) {
@@ -40,11 +40,11 @@ const authSlice = createSlice({
       const newOrders = filteredOrders;
       newOrders.push(payload);
       state.orders = newOrders;
-      state.processing = false;
+      state.loading = false;
       state.error = null;
     },
     updateOrderRequestFailed(state, { payload }) {
-      state.processing = false;
+      state.loading = false;
       state.error = payload;
     },
   },

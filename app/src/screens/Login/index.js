@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 
@@ -7,6 +7,8 @@ import { login as acLogin } from 'store/reducers/authSlice';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
+
+import { Page, Heading } from 'providers/ThemeProvider/styled';
 
 export default function Login() {
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +23,9 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <Page>
+      <Heading>Login</Heading>
+
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
@@ -60,20 +64,22 @@ export default function Login() {
             <TextInput
               type="email"
               name="email"
+              label="E-mail"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
-              errors={errors.email}
+              error={errors.email}
               touched={touched.email}
             />
 
             <TextInput
               type="password"
               name="password"
+              label="Password"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
-              errors={errors.password}
+              error={errors.password}
               touched={touched.password}
             />
 
@@ -83,6 +89,6 @@ export default function Login() {
           </form>
         )}
       </Formik>
-    </div>
+    </Page>
   );
 }

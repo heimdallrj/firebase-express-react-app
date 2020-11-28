@@ -10,25 +10,29 @@ import OrderSingle from 'screens/Orders/Single';
 import OrderCreate from 'screens/Orders/Create';
 import Logout from 'screens/Logout';
 
+import { Container } from 'providers/ThemeProvider/styled';
+
 function App() {
   return (
-    <Router>
-      <Route exact path="/login">
-        <Login />
-      </Route>
+    <Container>
+      <Router>
+        <Route exact path="/login">
+          <Login />
+        </Route>
 
-      <Route exact path="/logout">
-        <Logout />
-      </Route>
+        <Route exact path="/logout">
+          <Logout />
+        </Route>
 
-      <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute exact path="/" component={Home} />
 
-      <ProtectedRoute exact path="/orders" component={Orders} />
+        <ProtectedRoute exact path="/orders" component={Orders} />
 
-      <ProtectedRoute exact path="/orders/create" component={OrderCreate} />
+        <ProtectedRoute exact path="/orders/:id" component={OrderSingle} />
 
-      <ProtectedRoute exact path="/orders/:id" component={OrderSingle} />
-    </Router>
+        <ProtectedRoute exact path="/create-order" component={OrderCreate} />
+      </Router>
+    </Container>
   );
 }
 

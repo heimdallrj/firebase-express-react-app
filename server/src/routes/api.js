@@ -11,6 +11,9 @@ const response = {
   message: null,
 };
 
+// const formatOrderData = ({ uid, title, bookingDate }) => ({uid, title, });
+// const formatOrdersResponse = (orders) => orders.map(formatOrderData);
+
 /**
  * /orders
  */

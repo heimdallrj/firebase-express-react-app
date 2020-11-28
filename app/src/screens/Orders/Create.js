@@ -1,12 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
 
+import { Page, Heading } from 'providers/ThemeProvider/styled';
+
 export default function OrderCreate() {
   return (
-    <div>
+    <Page>
+      <Link to="/">&#8592; Back</Link>
+      <Heading>Create New Order</Heading>
+
       <Formik
         initialValues={{
           title: '',
@@ -48,96 +54,104 @@ export default function OrderCreate() {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
             <TextInput
               type="title"
               name="title"
+              label="Title"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.title}
-              errors={errors.title}
+              error={errors.title}
               touched={touched.title}
             />
 
             <TextInput
               type="bookingDate"
               name="bookingDate"
+              label="Booking Date"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.bookingDate}
-              errors={errors.bookingDate}
+              error={errors.bookingDate}
               touched={touched.bookingDate}
             />
 
             <TextInput
               type="name"
               name="name"
+              label="Customer name"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.name}
-              errors={errors.name}
+              error={errors.name}
               touched={touched.name}
             />
 
             <TextInput
               type="email"
               name="email"
+              label="E-mail"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
-              errors={errors.email}
+              error={errors.email}
               touched={touched.email}
             />
 
             <TextInput
               type="phone"
               name="phone"
+              label="Phone"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.phone}
-              errors={errors.phone}
+              error={errors.phone}
               touched={touched.phone}
             />
 
             <TextInput
               type="city"
               name="city"
+              label="City"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.city}
-              errors={errors.city}
+              error={errors.city}
               touched={touched.city}
             />
 
             <TextInput
               type="country"
               name="country"
+              label="Country"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.country}
-              errors={errors.country}
+              error={errors.country}
               touched={touched.country}
             />
 
             <TextInput
               type="street"
               name="street"
+              label="Street"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.street}
-              errors={errors.street}
+              error={errors.street}
               touched={touched.street}
             />
 
             <TextInput
               type="zip"
               name="zip"
+              label="Zip"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.zip}
-              errors={errors.zip}
+              error={errors.zip}
               touched={touched.zip}
             />
 
@@ -147,6 +161,6 @@ export default function OrderCreate() {
           </form>
         )}
       </Formik>
-    </div>
+    </Page>
   );
 }
