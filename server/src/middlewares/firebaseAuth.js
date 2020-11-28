@@ -6,6 +6,7 @@ module.exports = async (req, res, next) => {
   const { authorization } = req.headers;
   if (authorization) {
     const token = authorization.split(' ')[1];
+    console.log('+', authorization);
     await verifyToken(token);
 
     // Proceed since token verified
