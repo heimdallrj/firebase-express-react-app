@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import ThemeProvider from 'providers/ThemeProvider';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -14,9 +15,11 @@ configureFirebase();
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <ThemeProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
