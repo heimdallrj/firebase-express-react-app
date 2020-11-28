@@ -7,8 +7,10 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "firebase": "^8.1.1",
+    "formik": "^2.2.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -17,8 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.{js,jsx}'",
-    "lint:fix": "eslint './src/**/*.{js,jsx}' --fix"
+    "lint": "eslint src -c .eslintrc.js --ext js",
+    "lint:fix": "eslint src -c .eslintrc.js --ext js --fix"
   },
   "husky": {
     "hooks": {
@@ -26,7 +28,9 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "src/**/*.{js,css}": [
+      "eslint src -c .eslintrc.js --ext js --cache --fix"
+    ]
   },
   "proxy": "http://localhost:3001",
   "browserslist": {
