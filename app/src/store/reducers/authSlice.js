@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { signInWithEmailAndPassword } from 'utils/firebase';
-import { resetAuthHeader } from 'utils/http';
+import { setAuthHeader, resetAuthHeader } from 'utils/http';
 import { userSessionKey } from 'config';
 
 import { fetch as apiFetchUser } from 'api/users';
@@ -75,6 +75,7 @@ export const login = ({ email, password }, cb = () => {}) => async (
     const { uid, stsTokenManager } = parsedUser;
     const { accessToken } = stsTokenManager;
 
+    setAuthHeader(accessToken);
     const fetchedUserResponse = await apiFetchUser(uid);
     const { message: fetchedUser } = fetchedUserResponse;
 

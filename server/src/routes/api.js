@@ -1,6 +1,8 @@
 const express = require('express');
 const pick = require('lodash/pick');
 
+const firebaseAuthMiddleware = require('../middlewares/firebaseAuth');
+
 const router = express.Router();
 
 const Orders = require('../firebase/firestore/orders');
@@ -14,7 +16,7 @@ const response = {
 /**
  * /orders
  */
-router.get('/orders', async (req, res) => {
+router.get('/orders', firebaseAuthMiddleware, async (req, res) => {
   // TODO Should impliment pagination
   try {
     const orders = await Orders.findAll();
@@ -31,7 +33,7 @@ router.get('/orders', async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.get('/orders/:id', async (req, res) => {
+router.get('/orders/:id', firebaseAuthMiddleware, async (req, res) => {
   const id = req.params.id;
   try {
     const order = await Orders.findOne(id);
@@ -45,7 +47,7 @@ router.get('/orders/:id', async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.post('/orders', async (req, res) => {
+router.post('/orders', firebaseAuthMiddleware, async (req, res) => {
   const data = req.body;
   const order = pick(data, ['title', 'bookingDate', 'address', 'customer']);
 
@@ -61,7 +63,7 @@ router.post('/orders', async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.put('/orders/:id', async (req, res) => {
+router.put('/orders/:id', firebaseAuthMiddleware, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
   const order = pick(data, ['title', 'bookingDate']);
@@ -81,7 +83,7 @@ router.put('/orders/:id', async (req, res) => {
 /**
  * /users
  */
-router.get('/users/:id', async (req, res) => {
+router.get('/users/:id', firebaseAuthMiddleware, async (req, res) => {
   const id = req.params.id;
   try {
     const user = await Users.findOne(id);
@@ -95,7 +97,7 @@ router.get('/users/:id', async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.post('/users', async (req, res) => {
+router.post('/users', firebaseAuthMiddleware, async (req, res) => {
   const user = req.body;
 
   try {
@@ -110,7 +112,7 @@ router.post('/users', async (req, res) => {
   return res.status(response.code).send(response);
 });
 
-router.put('/users/:id', async (req, res) => {
+router.put('/users/:id', firebaseAuthMiddleware, async (req, res) => {
   const id = req.params.id;
   const user = req.body;
 
