@@ -20,6 +20,9 @@ const Users = {
     await usersRef.doc(id).set(doc, { merge: true });
     return { id, ...doc };
   },
+  delete: async (id) => {
+    await usersRef.doc(id).delete();
+  },
 };
 
 module.exports = Users;

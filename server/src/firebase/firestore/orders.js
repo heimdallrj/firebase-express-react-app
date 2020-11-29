@@ -25,6 +25,9 @@ const Orders = {
     await ordersRef.doc(id).set(doc, { merge: true });
     return { id, ...doc };
   },
+  delete: async (id) => {
+    await ordersRef.doc(id).delete();
+  },
 };
 
 module.exports = Orders;
