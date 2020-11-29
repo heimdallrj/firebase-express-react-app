@@ -21,6 +21,13 @@ input {
   width: 350px;
 }
 
+input[type='date'] {
+  display: block;
+
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+
 button {
   font-family: 'Poppins', sans-serif;
   padding: 10px 20px;

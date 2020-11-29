@@ -26,6 +26,10 @@ export const Tabel = styled.table`
 
 export const TabelRow = styled.tr`
   cursor: pointer;
+
+  &:hover {
+    color: #795d5d;
+  }
 `;
 
 export const TabelHead = styled.th`

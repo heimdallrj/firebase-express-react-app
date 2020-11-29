@@ -7,8 +7,14 @@ import { createOrder as acCreateOrder } from 'store/reducers/ordersSlice';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
+import Spinner from 'components/Spinner';
 
-import { Page, Heading, ErrorLabel } from 'providers/ThemeProvider/styled';
+import {
+  Page,
+  Heading,
+  ErrorLabel,
+  ButtonWrap,
+} from 'providers/ThemeProvider/styled';
 
 export default function OrderCreate() {
   const [error, setError] = useState(null);
@@ -115,6 +121,7 @@ export default function OrderCreate() {
               name="bookingDate"
               label="Booking Date"
               type="date"
+              placeholder="eg. YYYY-MM-DD"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.bookingDate}
@@ -201,9 +208,12 @@ export default function OrderCreate() {
               touched={touched.country}
             />
 
-            <Button type="submit" disabled={isSubmitting}>
-              Create
-            </Button>
+            <ButtonWrap>
+              <Button type="submit" disabled={isSubmitting}>
+                Create
+              </Button>
+              {isSubmitting && <Spinner />}
+            </ButtonWrap>
           </form>
         )}
       </Formik>

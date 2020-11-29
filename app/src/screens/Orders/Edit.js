@@ -8,8 +8,14 @@ import { updateOrder as acUpdateOrder } from 'store/reducers/ordersSlice';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
+import Spinner from 'components/Spinner';
 
-import { Page, Heading, ErrorLabel } from 'providers/ThemeProvider/styled';
+import {
+  Page,
+  Heading,
+  ErrorLabel,
+  ButtonWrap,
+} from 'providers/ThemeProvider/styled';
 
 export default function OrderEdit() {
   const { orders } = useSelector((state) => state.orders);
@@ -100,6 +106,7 @@ export default function OrderEdit() {
               name="bookingDate"
               label="Booking Date"
               type="date"
+              placeholder="eg. YYYY-MM-DD"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.bookingDate}
@@ -107,9 +114,12 @@ export default function OrderEdit() {
               touched={touched.bookingDate}
             />
 
-            <Button type="submit" disabled={isSubmitting}>
-              Update
-            </Button>
+            <ButtonWrap>
+              <Button type="submit" disabled={isSubmitting}>
+                Update
+              </Button>
+              {isSubmitting && <Spinner />}
+            </ButtonWrap>
           </form>
         )}
       </Formik>
