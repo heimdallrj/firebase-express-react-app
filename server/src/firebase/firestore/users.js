@@ -4,6 +4,16 @@ const uniqid = require('uniqid');
 const ds = admin.firestore();
 const usersRef = ds.collection('users');
 
+/** TODO
+ * Here, in both `orders.js` and `users.js`
+ * has some code logic duplication which can simplify further.
+ *
+ * Wrting a single firebase collection handler and
+ * reuse it as required is the best appraoch here.
+ *
+ * Keep this as it is for now.
+ */
+
 const Users = {
   create: async (doc) => {
     const userId = uniqid();
