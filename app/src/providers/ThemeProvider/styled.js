@@ -15,6 +15,11 @@ export const ErrorLabel = styled.p`
   font-size: 12px;
 `;
 
+export const ButtonWrap = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
 export const Tabel = styled.table`
   font-size: 14px;
 `;

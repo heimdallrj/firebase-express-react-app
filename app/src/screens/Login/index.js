@@ -7,8 +7,14 @@ import { login as acLogin } from 'store/reducers/authSlice';
 
 import TextInput from 'components/core/TextInput';
 import Button from 'components/core/Button';
+import Spinner from 'components/Spinner';
 
-import { Page, Heading, ErrorLabel } from 'providers/ThemeProvider/styled';
+import {
+  Page,
+  Heading,
+  ErrorLabel,
+  ButtonWrap,
+} from 'providers/ThemeProvider/styled';
 
 export default function Login() {
   const { user } = useSelector((state) => state.auth);
@@ -90,9 +96,12 @@ export default function Login() {
               touched={touched.password}
             />
 
-            <Button type="submit" disabled={isSubmitting}>
-              Login
-            </Button>
+            <ButtonWrap>
+              <Button type="submit" disabled={isSubmitting}>
+                Login
+              </Button>
+              {isSubmitting && <Spinner />}
+            </ButtonWrap>
           </form>
         )}
       </Formik>
