@@ -59,4 +59,12 @@ Frontend on http://localhost:3000
 
 Backend on http://localhost:3001/api
 
-Cheers!.
+### Run Tests
+
+Run `yarn test` for run tests on both apps from the particular directory.
+
+## Issues
+
+- HTML DatePicker not working properly on Safari. As a fallback strategy, I've put date format as placeholder text. `eg. YYYY-MM-DD`.
+
+Cheers!
